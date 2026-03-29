@@ -1,0 +1,33 @@
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int resIndex = 0, resLen = 0;
+        for(int i=0; i < s.size(); i++){
+            int l = i, r = i;
+            while(l>=0 && r < s.size() && s[l] == s[r]){
+                if(r - l + 1 > resLen){ //this is the logic of max
+                    // if it's more then len then only we modify the index
+                    resIndex = l;
+                    resLen = r - l +1;
+                }
+                l--;
+                r++;
+            }
+            
+            //for even centres
+            l = i;
+            r = i + 1;
+
+            while(l>=0 && r < s.size() && s[l] == s[r]){
+                if(r - l + 1 > resLen){
+                    resIndex = l;
+                    resLen = r - l + 1;
+                }
+                l--;
+                r++;
+            }
+        }
+
+        return s.substr(resIndex, resLen);
+    }
+};
